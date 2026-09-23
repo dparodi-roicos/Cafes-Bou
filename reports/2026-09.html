@@ -151,6 +151,8 @@
   </footer>
 </div>
 
+<script>window.PIN_MONTH="2026-09";window.DATA_PATH="../data/history.json";window.REPORTS_LINK_BASE="";window.LATEST_LINK="../index.html";</script>
+
 <script>
   function fmt(n, d){ return (n||0).toLocaleString('es-ES', {minimumFractionDigits:d, maximumFractionDigits:d}); }
 
@@ -174,9 +176,14 @@
     svg.innerHTML = html;
   }
 
-  fetch('data/history.json').then(r=>r.json()).then(data=>{
+  // Páginas de archivo (reports/AAAA-MM.html) fijan window.PIN_MONTH y window.DATA_PATH
+  // antes de este script para renderizar un mes concreto en vez del último.
+  const DATA_PATH = window.DATA_PATH || 'data/history.json';
+  const PIN_MONTH = window.PIN_MONTH || null;
+
+  fetch(DATA_PATH).then(r=>r.json()).then(data=>{
     const months = data.months || [];
-    const latest = months[months.length-1];
+    const latest = (PIN_MONTH && months.find(m=>m.month===PIN_MONTH)) || months[months.length-1];
     if(!latest){ document.getElementById('headerSub').textContent = 'Todavía no hay datos.'; return; }
 
     document.getElementById('headerSub').innerHTML =
@@ -217,10 +224,11 @@
       </tr>
     `).join("");
 
-    const older = months.slice(0,-1).reverse();
+    const linkBase = window.REPORTS_LINK_BASE || 'reports/';
+    const older = months.filter(m=>m!==latest).slice().reverse();
     document.getElementById('monthsList').innerHTML = older.length
-      ? older.map(m=>`<a href="reports/${m.month}.html">${m.label}</a>`).join("")
-      : `<span style="font-size:12.5px;color:var(--muted);">Este es el primer informe — los meses anteriores aparecerán aquí a partir de la próxima actualización.</span>`;
+      ? older.map(m=>`<a href="${linkBase}${m.month}.html">${m.label}</a>`).join("") + (PIN_MONTH ? `<a href="${window.LATEST_LINK||'../index.html'}">← Ver informe más reciente</a>` : "")
+      : (PIN_MONTH ? "" : `<span style="font-size:12.5px;color:var(--muted);">Este es el primer informe — los meses anteriores aparecerán aquí a partir de la próxima actualización.</span>`);
   }).catch(()=>{
     document.getElementById('headerSub').textContent = 'No se pudieron cargar los datos.';
   });
