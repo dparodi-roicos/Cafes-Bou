@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cafés Bou · Informe de email marketing</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{
+    --bg:#faf8f5; --surface:#ffffff; --surface-2:#f0f0f0; --border:#e4e1da;
+    --ink:#1a1a1a; --body:#3f3f3f; --muted:#5a5a5a;
+    --accent:#ff9900; --accent-dim:#ffd699; --accent-soft:#fff1da;
+    --critical:#c13b3b; --critical-soft:#fbeaea;
+    --warning:#a8721e; --warning-soft:#f7ecda;
+    --ok:#3f7a4d; --ok-soft:#e6f0e7;
+    --low:#8a8680; --low-soft:#f0eeea;
+    --shadow: 0 1px 2px rgba(26,26,26,.04), 0 8px 24px -12px rgba(26,26,26,.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#141210; --surface:#1d1a17; --surface-2:#252119; --border:#38322a;
+      --ink:#f5f2ed; --body:#d8d4cc; --muted:#a39d92;
+      --accent:#ff9900; --accent-dim:#5c4322; --accent-soft:#3a2c14;
+      --critical:#e57373; --critical-soft:#3a2222;
+      --warning:#d9a24b; --warning-soft:#332811;
+      --ok:#7fb890; --ok-soft:#1f2f22;
+      --low:#918b80; --low-soft:#282420;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:'Poppins',system-ui,-apple-system,sans-serif;}
+  .app{max-width:980px;margin:0 auto;padding:0 20px 80px;}
+  header.top{background:var(--ink);color:#f5f2ed;margin:0 -20px 24px;padding:28px 20px 24px;}
+  @media (min-width:600px){ header.top{padding:32px 36px 28px;border-radius:0 0 18px 18px;} .app{padding-left:36px;padding-right:36px;} }
+  .brand{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c9c2b6;margin-bottom:14px;}
+  .brand b{color:var(--accent);font-weight:700;}
+  .brand .dot{width:4px;height:4px;border-radius:50%;background:#5a5648;}
+  h1{font-size:26px;font-weight:700;margin:0 0 6px;color:#fff;letter-spacing:-.01em;}
+  .sub{font-size:13.5px;color:#c9c2b6;display:flex;flex-wrap:wrap;gap:6px 14px;}
+  .sub a{color:#e8c98a;}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px;}
+  @media (max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} }
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);}
+  .stat .n{font-size:22px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1;}
+  .stat .l{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;}
+  .stats-note{font-size:12px;color:var(--muted);margin:8px 0 28px;text-align:right;}
+
+  section.block{margin-bottom:30px;}
+  .block-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--border);}
+  .block-num{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.06em;}
+  .block-title{font-size:16.5px;font-weight:700;color:var(--ink);}
+  .block-desc{font-size:12.5px;color:var(--muted);margin:-4px 0 14px;line-height:1.5;max-width:70ch;}
+
+  .charts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media (max-width:760px){ .charts{grid-template-columns:1fr;} }
+  .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px 10px;box-shadow:var(--shadow);}
+  .chart-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+  .chart-sub{font-size:10.5px;color:var(--muted);margin-bottom:8px;}
+  .chart-svg{width:100%;height:120px;overflow:visible;}
+  .bar{fill:var(--accent-dim);}
+  .bar.focus{fill:var(--accent);}
+  .axis-label{font-size:8.5px;fill:var(--muted);font-family:'Poppins',sans-serif;}
+  .empty-chart{font-size:12px;color:var(--muted);font-style:italic;padding:30px 0;text-align:center;}
+
+  .table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:760px;}
+  thead th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);white-space:nowrap;}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--body);vertical-align:top;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td.subj{white-space:normal;font-variant-numeric:normal;color:var(--ink);font-weight:600;max-width:220px;}
+  .best{color:var(--ok);font-weight:700;}
+  .worst{color:var(--critical);font-weight:700;}
+
+  .finding{display:flex;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:8px;box-shadow:var(--shadow);}
+  .finding .ico{flex:none;font-size:15px;line-height:1.3;}
+  .finding p{margin:0;font-size:13px;line-height:1.55;color:var(--body);}
+  .finding b{color:var(--ink);}
+
+  .months-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .months-list a{font-size:12.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:7px 14px;text-decoration:none;box-shadow:var(--shadow);}
+  .months-list a:hover{border-color:var(--accent);color:var(--accent);}
+
+  footer.note{margin-top:20px;padding-top:18px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);text-align:center;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><b>ROICOS</b><span class="dot"></span><span>Informe para cliente</span></div>
+    <h1>Cafés Bou — Rendimiento email marketing</h1>
+    <div class="sub" id="headerSub">Cargando…</div>
+  </header>
+
+  <div class="stats" id="statsRow"></div>
+  <div class="stats-note" id="statsNote"></div>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">01</span>
+      <span class="block-title">Evolución mes a mes</span>
+    </div>
+    <div class="block-desc" id="trendDesc">El histórico se irá acumulando con cada actualización mensual (día 1 de cada mes).</div>
+    <div class="charts">
+      <div class="chart-card">
+        <div class="chart-title">Apertura media</div>
+        <div class="chart-sub">% por mes</div>
+        <svg class="chart-svg" id="trendOpen" viewBox="0 0 280 120"></svg>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Clic medio (CTR)</div>
+        <div class="chart-sub">% por mes</div>
+        <svg class="chart-svg" id="trendClick" viewBox="0 0 280 120"></svg>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Ingresos atribuidos</div>
+        <div class="chart-sub">€ por mes</div>
+        <svg class="chart-svg" id="trendRevenue" viewBox="0 0 280 120"></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">02</span>
+      <span class="block-title" id="detailTitle">Detalle por envío</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Mail</th><th>Asunto</th><th>Envío</th><th>Entregados</th><th>Apertura</th><th>CTR</th><th>CTOR</th><th>Conv.</th><th>Ingresos</th><th>Bajas</th><th>Rebote</th>
+          </tr>
+        </thead>
+        <tbody id="detailRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="block-num">03</span>
+      <span class="block-title">Meses anteriores</span>
+    </div>
+    <div class="months-list" id="monthsList"></div>
+  </section>
+
+  <footer class="note">
+    Informe preparado por Roicos a partir de la API de Klaviyo. Se actualiza automáticamente el día 1 de cada mes.
+  </footer>
+</div>
+
+<script>
+  function fmt(n, d){ return (n||0).toLocaleString('es-ES', {minimumFractionDigits:d, maximumFractionDigits:d}); }
+
+  function drawBarChart(svgId, items, valueFn, labelFn, fmtFn, focusFn){
+    const svg = document.getElementById(svgId);
+    const W = 280, H = 120, padB = 16, padT = 6;
+    const n = items.length;
+    if(!n){ svg.parentElement.innerHTML = svg.parentElement.querySelector('.chart-title').outerHTML + svg.parentElement.querySelector('.chart-sub').outerHTML + '<div class="empty-chart">Sin datos todavía</div>'; return; }
+    const gap = 6;
+    const barW = (W - gap*(n-1)) / n;
+    const max = Math.max(...items.map(valueFn)) * 1.15 || 1;
+    let html = "";
+    items.forEach((d,i)=>{
+      const v = valueFn(d);
+      const h = Math.max((v/max) * (H-padB-padT), v>0 ? 2 : 0);
+      const x = i*(barW+gap);
+      const y = H - padB - h;
+      html += `<rect class="bar ${focusFn(d)?'focus':''}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="2"><title>${labelFn(d)}: ${fmtFn(v)}</title></rect>`;
+      html += `<text class="axis-label" x="${(x+barW/2).toFixed(1)}" y="${H-4}" text-anchor="middle">${labelFn(d)}</text>`;
+    });
+    svg.innerHTML = html;
+  }
+
+  fetch('data/history.json').then(r=>r.json()).then(data=>{
+    const months = data.months || [];
+    const latest = months[months.length-1];
+    if(!latest){ document.getElementById('headerSub').textContent = 'Todavía no hay datos.'; return; }
+
+    document.getElementById('headerSub').innerHTML =
+      `<span>${latest.label}</span><span>·</span><span>${latest.campaign_range}</span><span>·</span><span>Generado el ${latest.generated_at}</span>`;
+    document.getElementById('detailTitle').textContent = `Detalle por envío — ${latest.label}`;
+
+    document.getElementById('statsRow').innerHTML = `
+      <div class="stat"><div class="n">${fmt(latest.avg_open_rate,1)}%</div><div class="l">Apertura media</div></div>
+      <div class="stat"><div class="n">${fmt(latest.avg_click_rate,2)}%</div><div class="l">Clic medio (CTR)</div></div>
+      <div class="stat"><div class="n">${fmt(latest.avg_unsub_rate,2)}%</div><div class="l">Bajas media</div></div>
+      <div class="stat"><div class="n">${fmt(latest.avg_bounce_rate,2)}%</div><div class="l">Rebote medio</div></div>
+      <div class="stat"><div class="n">${latest.conversions}</div><div class="l">Conversiones (${latest.campaigns_count} envíos)</div></div>
+      <div class="stat"><div class="n">${fmt(latest.revenue,2)} €</div><div class="l">Ingresos atribuidos</div></div>
+    `;
+    document.getElementById('statsNote').textContent = 'Datos de la API de Klaviyo · reporte por campaña, atribución a "Placed Order"';
+
+    drawBarChart('trendOpen', months, m=>m.avg_open_rate, m=>m.month.slice(2), v=>v.toFixed(1)+'%', m=>m===latest);
+    drawBarChart('trendClick', months, m=>m.avg_click_rate, m=>m.month.slice(2), v=>v.toFixed(2)+'%', m=>m===latest);
+    drawBarChart('trendRevenue', months, m=>m.revenue, m=>m.month.slice(2), v=>v.toFixed(0)+'€', m=>m===latest);
+
+    const rows = latest.campaigns || [];
+    const maxCtr = Math.max(...rows.map(d=>d.click_rate));
+    const minCtr = Math.min(...rows.map(d=>d.click_rate));
+    const maxUnsub = Math.max(...rows.map(d=>d.unsub_rate));
+    document.getElementById('detailRows').innerHTML = rows.map(d=>`
+      <tr>
+        <td>Mail ${d.mail}</td>
+        <td class="subj">${d.subject}</td>
+        <td>${d.send}</td>
+        <td>${d.delivered.toLocaleString('es-ES')}</td>
+        <td>${fmt(d.open_rate,1)}%</td>
+        <td class="${d.click_rate===maxCtr?'best':d.click_rate===minCtr?'worst':''}">${fmt(d.click_rate,2)}%</td>
+        <td>${fmt(d.ctor,2)}%</td>
+        <td>${d.conversions}</td>
+        <td>${fmt(d.revenue,2)} €</td>
+        <td class="${d.unsub_rate===maxUnsub?'worst':''}">${fmt(d.unsub_rate,2)}%</td>
+        <td>${fmt(d.bounce_rate,2)}%</td>
+      </tr>
+    `).join("");
+
+    const older = months.slice(0,-1).reverse();
+    document.getElementById('monthsList').innerHTML = older.length
+      ? older.map(m=>`<a href="reports/${m.month}.html">${m.label}</a>`).join("")
+      : `<span style="font-size:12.5px;color:var(--muted);">Este es el primer informe — los meses anteriores aparecerán aquí a partir de la próxima actualización.</span>`;
+  }).catch(()=>{
+    document.getElementById('headerSub').textContent = 'No se pudieron cargar los datos.';
+  });
+</script>
+</body>
+</html>

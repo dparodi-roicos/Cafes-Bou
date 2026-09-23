@@ -1,0 +1,27 @@
+{
+  "months": [
+    {
+      "month": "2026-09",
+      "label": "Septiembre 2026",
+      "generated_at": "2026-09-23",
+      "campaign_range": "Mail 23–28",
+      "campaigns_count": 6,
+      "recipients": 11537,
+      "delivered": 11454,
+      "avg_open_rate": 28.10,
+      "avg_click_rate": 0.62,
+      "avg_unsub_rate": 0.42,
+      "avg_bounce_rate": 0.72,
+      "conversions": 11,
+      "revenue": 558.45,
+      "campaigns": [
+        { "mail": 23, "subject": "Lo difícil es repetir", "send": "2026-09-03", "delivered": 1922, "open_rate": 23.26, "click_rate": 0.31, "ctor": 1.34, "conversions": 1, "revenue": 42.50, "unsub_rate": 0.26, "bounce_rate": 1.03 },
+        { "mail": 24, "subject": "El sitio de siempre", "send": "2026-09-08", "delivered": 1922, "open_rate": 34.96, "click_rate": 0.88, "ctor": 2.53, "conversions": 2, "revenue": 99.00, "unsub_rate": 0.42, "bounce_rate": 0.72 },
+        { "mail": 25, "subject": "Hay cosas que solo echas de menos cuando vuelves", "send": "2026-09-10", "delivered": 1921, "open_rate": 33.06, "click_rate": 1.15, "ctor": 3.47, "conversions": 5, "revenue": 233.70, "unsub_rate": 0.78, "bounce_rate": 0.42 },
+        { "mail": 26, "subject": "¿Lo de siempre?", "send": "2026-09-15", "delivered": 1900, "open_rate": 24.32, "click_rate": 0.47, "ctor": 1.95, "conversions": 1, "revenue": 46.95, "unsub_rate": 0.26, "bounce_rate": 0.73 },
+        { "mail": 27, "subject": "¿Dónde tienes el café?", "send": "2026-09-17", "delivered": 1903, "open_rate": 24.07, "click_rate": 0.16, "ctor": 0.66, "conversions": 2, "revenue": 136.30, "unsub_rate": 0.31, "bounce_rate": 0.58 },
+        { "mail": 28, "subject": "¿Cuál?", "send": "2026-09-22", "delivered": 1886, "open_rate": 28.95, "click_rate": 0.74, "ctor": 2.56, "conversions": 0, "revenue": 0, "unsub_rate": 0.48, "bounce_rate": 0.84 }
+      ]
+    }
+  ]
+}
