@@ -9,140 +9,169 @@
   :root{
     --bg:#faf8f5; --surface:#ffffff; --surface-2:#f0f0f0; --border:#e4e1da;
     --ink:#1a1a1a; --body:#3f3f3f; --muted:#5a5a5a;
-    --accent:#ff9900; --accent-dim:#ffd699; --accent-soft:#fff1da;
+    --accent:#ff9900; --accent-dim:#ffd699; --accent-soft:#fff1da; --accent-line:#ff9900;
     --critical:#c13b3b; --critical-soft:#fbeaea;
     --warning:#a8721e; --warning-soft:#f7ecda;
     --ok:#3f7a4d; --ok-soft:#e6f0e7;
     --low:#8a8680; --low-soft:#f0eeea;
     --shadow: 0 1px 2px rgba(26,26,26,.04), 0 8px 24px -12px rgba(26,26,26,.10);
+    --shadow-lg: 0 4px 8px rgba(26,26,26,.05), 0 16px 40px -16px rgba(26,26,26,.16);
   }
   @media (prefers-color-scheme: dark){
     :root{
       --bg:#141210; --surface:#1d1a17; --surface-2:#252119; --border:#38322a;
       --ink:#f5f2ed; --body:#d8d4cc; --muted:#a39d92;
-      --accent:#ff9900; --accent-dim:#5c4322; --accent-soft:#3a2c14;
+      --accent:#ff9900; --accent-dim:#5c4322; --accent-soft:#3a2c14; --accent-line:#ffb84d;
       --critical:#e57373; --critical-soft:#3a2222;
       --warning:#d9a24b; --warning-soft:#332811;
       --ok:#7fb890; --ok-soft:#1f2f22;
       --low:#918b80; --low-soft:#282420;
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+      --shadow-lg: 0 4px 8px rgba(0,0,0,.35), 0 20px 44px -18px rgba(0,0,0,.65);
     }
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--body);font-family:'Poppins',system-ui,-apple-system,sans-serif;}
-  .app{max-width:980px;margin:0 auto;padding:0 20px 80px;}
-  header.top{background:var(--ink);color:#f5f2ed;margin:0 -20px 24px;padding:28px 20px 24px;}
-  @media (min-width:600px){ header.top{padding:32px 36px 28px;border-radius:0 0 18px 18px;} .app{padding-left:36px;padding-right:36px;} }
+  .app{max-width:1040px;margin:0 auto;padding:0 20px 90px;}
+  header.top{background:var(--ink);color:#f5f2ed;margin:0 -20px 26px;padding:30px 20px 26px;}
+  @media (min-width:600px){ header.top{padding:36px 40px 30px;border-radius:0 0 20px 20px;} .app{padding-left:40px;padding-right:40px;} }
   .brand{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c9c2b6;margin-bottom:14px;}
   .brand b{color:var(--accent);font-weight:700;}
   .brand .dot{width:4px;height:4px;border-radius:50%;background:#5a5648;}
-  h1{font-size:26px;font-weight:700;margin:0 0 6px;color:#fff;letter-spacing:-.01em;}
+  h1{font-size:27px;font-weight:700;margin:0 0 6px;color:#fff;letter-spacing:-.01em;}
   .sub{font-size:13.5px;color:#c9c2b6;display:flex;flex-wrap:wrap;gap:6px 14px;}
-  .sub a{color:#e8c98a;}
 
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px;}
-  @media (max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} }
-  .stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);}
-  .stat .n{font-size:22px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1;}
-  .stat .l{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;}
-  .stats-note{font-size:12px;color:var(--muted);margin:8px 0 28px;text-align:right;}
+  section.block{margin-bottom:34px;}
+  .block-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
+  .block-eyebrow{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;}
+  .block-title{font-size:19px;font-weight:700;color:var(--ink);}
+  .block-desc{font-size:13px;color:var(--muted);margin:-8px 0 16px;line-height:1.5;max-width:70ch;}
 
-  section.block{margin-bottom:30px;}
-  .block-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--border);}
-  .block-num{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.06em;}
-  .block-title{font-size:16.5px;font-weight:700;color:var(--ink);}
-  .block-desc{font-size:12.5px;color:var(--muted);margin:-4px 0 14px;line-height:1.5;max-width:70ch;}
+  /* HERO row */
+  .hero{display:grid;grid-template-columns:1.15fr 1fr 1fr 1fr;gap:14px;}
+  @media (max-width:840px){ .hero{grid-template-columns:1fr 1fr;} }
+  .hero-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;}
+  .gauge-wrap{position:relative;width:112px;height:112px;}
+  .gauge-wrap svg{width:100%;height:100%;transform:rotate(-90deg);}
+  .gauge-track{fill:none;stroke:var(--surface-2);stroke-width:11;}
+  .gauge-fill{fill:none;stroke:var(--accent);stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+  .gauge-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .gauge-label .n{font-size:22px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1;}
+  .gauge-label .l{font-size:9.5px;color:var(--muted);margin-top:2px;}
+  .hero-title{font-size:12.5px;font-weight:700;color:var(--ink);}
+  .hero-icon{font-size:22px;line-height:1;}
+  .hero-num{font-size:30px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1;}
+  .hero-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+  .hero-delta{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;display:inline-flex;align-items:center;gap:3px;}
+  .hero-delta.up{background:var(--ok-soft);color:var(--ok);}
+  .hero-delta.down{background:var(--critical-soft);color:var(--critical);}
+  .hero-delta.flat{background:var(--low-soft);color:var(--low);}
 
-  .charts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-  @media (max-width:760px){ .charts{grid-template-columns:1fr;} }
-  .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px 10px;box-shadow:var(--shadow);}
-  .chart-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
-  .chart-sub{font-size:10.5px;color:var(--muted);margin-bottom:8px;}
-  .chart-svg{width:100%;height:120px;overflow:visible;}
-  .bar{fill:var(--accent-dim);}
-  .bar.focus{fill:var(--accent);}
-  .axis-label{font-size:8.5px;fill:var(--muted);font-family:'Poppins',sans-serif;}
-  .empty-chart{font-size:12px;color:var(--muted);font-style:italic;padding:30px 0;text-align:center;}
+  /* Highlight callouts */
+  .highlights{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:700px){ .highlights{grid-template-columns:1fr;} }
+  .highlight-card{border-radius:16px;padding:20px 22px;box-shadow:var(--shadow-lg);}
+  .highlight-card.win{background:linear-gradient(135deg, var(--accent-soft), var(--surface));border:1px solid var(--accent-dim);}
+  .highlight-card.watch{background:var(--surface);border:1px solid var(--border);}
+  .highlight-eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+  .highlight-card.win .highlight-eyebrow{color:var(--accent-hover, var(--accent));}
+  .highlight-card.watch .highlight-eyebrow{color:var(--warning);}
+  .highlight-headline{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.35;}
+  .highlight-body{font-size:13px;color:var(--body);line-height:1.55;}
 
-  .table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);}
-  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:760px;}
-  thead th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);white-space:nowrap;}
-  tbody td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--body);vertical-align:top;font-variant-numeric:tabular-nums;white-space:nowrap;}
-  tbody tr:last-child td{border-bottom:none;}
-  tbody td.subj{white-space:normal;font-variant-numeric:normal;color:var(--ink);font-weight:600;max-width:220px;}
-  .best{color:var(--ok);font-weight:700;}
-  .worst{color:var(--critical);font-weight:700;}
+  /* Trend charts */
+  .charts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:800px){ .charts{grid-template-columns:1fr;} }
+  .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px 14px;box-shadow:var(--shadow-lg);}
+  .chart-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+  .chart-sub{font-size:11px;color:var(--muted);margin-bottom:10px;}
+  .chart-svg{width:100%;height:140px;overflow:visible;}
+  .area-fill{fill:url(#areaGrad);}
+  .area-line{fill:none;stroke:var(--accent-line);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+  .area-dot{fill:var(--surface);stroke:var(--accent-line);stroke-width:2.5;}
+  .area-dot.focus{fill:var(--accent);r:4.5;}
+  .axis-label{font-size:9px;fill:var(--muted);font-family:'Poppins',sans-serif;}
+  .empty-chart{font-size:12px;color:var(--muted);font-style:italic;padding:36px 0;text-align:center;}
 
-  .finding{display:flex;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:8px;box-shadow:var(--shadow);}
-  .finding .ico{flex:none;font-size:15px;line-height:1.3;}
-  .finding p{margin:0;font-size:13px;line-height:1.55;color:var(--body);}
-  .finding b{color:var(--ink);}
+  .tooltip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-size:11.5px;padding:6px 10px;border-radius:8px;box-shadow:var(--shadow-lg);opacity:0;transform:translate(-50%,-120%);transition:opacity .1s;z-index:20;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .tooltip.show{opacity:1;}
+  .tooltip b{color:var(--accent);}
+
+  /* Per-mail cards (replaces plain table) */
+  .mail-cards{display:flex;flex-direction:column;gap:10px;}
+  .mail-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.6fr 1fr 1fr auto;gap:16px;align-items:center;}
+  @media (max-width:760px){ .mail-card{grid-template-columns:1fr;} }
+  .mail-id{font-size:10.5px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;}
+  .mail-subject{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3;margin-top:2px;}
+  .mail-date{font-size:11px;color:var(--muted);margin-top:3px;}
+  .metric-bar-group{display:flex;flex-direction:column;gap:2px;}
+  .metric-bar-label{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);}
+  .metric-bar-label b{color:var(--ink);font-size:12.5px;font-variant-numeric:tabular-nums;}
+  .metric-bar-track{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;}
+  .metric-bar-fill{height:100%;border-radius:99px;background:var(--accent);}
+  .mail-right{display:flex;gap:18px;text-align:center;}
+  .mail-stat .n{font-size:15px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .mail-stat .l{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .mail-tech{font-size:10.5px;color:var(--muted);margin-top:8px;grid-column:1/-1;border-top:1px dashed var(--border);padding-top:8px;}
+  .mail-tech b{color:var(--body);}
+  .flag-hi{color:var(--critical);font-weight:700;}
 
   .months-list{display:flex;flex-wrap:wrap;gap:8px;}
-  .months-list a{font-size:12.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:7px 14px;text-decoration:none;box-shadow:var(--shadow);}
+  .months-list a{font-size:12.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:8px 15px;text-decoration:none;box-shadow:var(--shadow);}
   .months-list a:hover{border-color:var(--accent);color:var(--accent);}
 
-  footer.note{margin-top:20px;padding-top:18px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);text-align:center;line-height:1.6;}
+  footer.note{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);text-align:center;line-height:1.6;}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="top">
     <div class="brand"><b>ROICOS</b><span class="dot"></span><span>Informe para cliente</span></div>
-    <h1>Cafés Bou — Rendimiento email marketing</h1>
+    <h1>☕ Cafés Bou — Rendimiento email marketing</h1>
     <div class="sub" id="headerSub">Cargando…</div>
   </header>
 
-  <div class="stats" id="statsRow"></div>
-  <div class="stats-note" id="statsNote"></div>
+  <section class="block">
+    <div class="hero" id="heroRow"></div>
+  </section>
 
   <section class="block">
-    <div class="block-head">
-      <span class="block-num">01</span>
-      <span class="block-title">Evolución mes a mes</span>
-    </div>
-    <div class="block-desc" id="trendDesc">El histórico se irá acumulando con cada actualización mensual (día 1 de cada mes).</div>
+    <div class="highlights" id="highlightsRow"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head"><span class="block-eyebrow">Evolución</span></div>
+    <div class="block-title" style="margin:-10px 0 4px;">Mes a mes</div>
+    <div class="block-desc" id="trendDesc">El histórico se acumula automáticamente cada día 1 de mes.</div>
     <div class="charts">
       <div class="chart-card">
-        <div class="chart-title">Apertura media</div>
-        <div class="chart-sub">% por mes</div>
-        <svg class="chart-svg" id="trendOpen" viewBox="0 0 280 120"></svg>
+        <div class="chart-title">📬 Apertura media</div>
+        <div class="chart-sub">% de entregados que abrieron</div>
+        <svg class="chart-svg" id="trendOpen" viewBox="0 0 280 140"></svg>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Clic medio (CTR)</div>
-        <div class="chart-sub">% por mes</div>
-        <svg class="chart-svg" id="trendClick" viewBox="0 0 280 120"></svg>
+        <div class="chart-title">🖱️ Clic medio</div>
+        <div class="chart-sub">% de entregados que hicieron clic</div>
+        <svg class="chart-svg" id="trendClick" viewBox="0 0 280 140"></svg>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Ingresos atribuidos</div>
-        <div class="chart-sub">€ por mes</div>
-        <svg class="chart-svg" id="trendRevenue" viewBox="0 0 280 120"></svg>
+        <div class="chart-title">💶 Ingresos</div>
+        <div class="chart-sub">Atribuidos por mes</div>
+        <svg class="chart-svg" id="trendRevenue" viewBox="0 0 280 140"></svg>
       </div>
     </div>
   </section>
 
   <section class="block">
-    <div class="block-head">
-      <span class="block-num">02</span>
-      <span class="block-title" id="detailTitle">Detalle por envío</span>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Mail</th><th>Asunto</th><th>Envío</th><th>Entregados</th><th>Apertura</th><th>CTR</th><th>CTOR</th><th>Conv.</th><th>Ingresos</th><th>Bajas</th><th>Rebote</th>
-          </tr>
-        </thead>
-        <tbody id="detailRows"></tbody>
-      </table>
-    </div>
+    <div class="block-head"><span class="block-eyebrow">Detalle</span></div>
+    <div class="block-title" id="detailTitle" style="margin:-10px 0 4px;">Por email</div>
+    <div class="block-desc">Las barras muestran apertura y clic de un vistazo. El detalle técnico (bajas y rebotes) va debajo de cada tarjeta.</div>
+    <div class="mail-cards" id="mailCards"></div>
   </section>
 
   <section class="block">
-    <div class="block-head">
-      <span class="block-num">03</span>
-      <span class="block-title">Meses anteriores</span>
-    </div>
+    <div class="block-head"><span class="block-eyebrow">Archivo</span></div>
+    <div class="block-title" style="margin:-10px 0 4px;">Meses anteriores</div>
     <div class="months-list" id="monthsList"></div>
   </section>
 
@@ -151,33 +180,69 @@
   </footer>
 </div>
 
+<div class="tooltip" id="tooltip"></div>
+
 <script>window.PIN_MONTH="2026-09";window.DATA_PATH="../data/history.json";window.REPORTS_LINK_BASE="";window.LATEST_LINK="../index.html";</script>
 
 <script>
   function fmt(n, d){ return (n||0).toLocaleString('es-ES', {minimumFractionDigits:d, maximumFractionDigits:d}); }
+  const tooltip = document.getElementById('tooltip');
+  function showTip(evt, html){ tooltip.innerHTML = html; tooltip.style.left = evt.clientX + 'px'; tooltip.style.top = evt.clientY + 'px'; tooltip.classList.add('show'); }
+  function hideTip(){ tooltip.classList.remove('show'); }
 
-  function drawBarChart(svgId, items, valueFn, labelFn, fmtFn, focusFn){
-    const svg = document.getElementById(svgId);
-    const W = 280, H = 120, padB = 16, padT = 6;
-    const n = items.length;
-    if(!n){ svg.parentElement.innerHTML = svg.parentElement.querySelector('.chart-title').outerHTML + svg.parentElement.querySelector('.chart-sub').outerHTML + '<div class="empty-chart">Sin datos todavía</div>'; return; }
-    const gap = 6;
-    const barW = (W - gap*(n-1)) / n;
-    const max = Math.max(...items.map(valueFn)) * 1.15 || 1;
-    let html = "";
-    items.forEach((d,i)=>{
-      const v = valueFn(d);
-      const h = Math.max((v/max) * (H-padB-padT), v>0 ? 2 : 0);
-      const x = i*(barW+gap);
-      const y = H - padB - h;
-      html += `<rect class="bar ${focusFn(d)?'focus':''}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="2"><title>${labelFn(d)}: ${fmtFn(v)}</title></rect>`;
-      html += `<text class="axis-label" x="${(x+barW/2).toFixed(1)}" y="${H-4}" text-anchor="middle">${labelFn(d)}</text>`;
-    });
-    svg.innerHTML = html;
+  function deltaBadge(curr, prev, higherIsBetter){
+    if(prev === undefined || prev === null) return '';
+    const diff = curr - prev;
+    if(Math.abs(diff) < 0.01) return `<span class="hero-delta flat">= vs. mes anterior</span>`;
+    const good = higherIsBetter ? diff > 0 : diff < 0;
+    const arrow = diff > 0 ? '▲' : '▼';
+    return `<span class="hero-delta ${good?'up':'down'}">${arrow} ${fmt(Math.abs(diff),diff<1&&diff>-1?2:1)} vs. mes anterior</span>`;
   }
 
-  // Páginas de archivo (reports/AAAA-MM.html) fijan window.PIN_MONTH y window.DATA_PATH
-  // antes de este script para renderizar un mes concreto en vez del último.
+  function drawGauge(pct){
+    const r = 46, c = 2*Math.PI*r;
+    const off = c * (1 - Math.min(pct,100)/100);
+    return `<div class="gauge-wrap"><svg viewBox="0 0 112 112">
+      <circle class="gauge-track" cx="56" cy="56" r="${r}"></circle>
+      <circle class="gauge-fill" cx="56" cy="56" r="${r}" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"></circle>
+    </svg><div class="gauge-label"><div class="n">${fmt(pct,1)}%</div><div class="l">apertura</div></div></div>`;
+  }
+
+  function drawAreaChart(svgId, items, valueFn, labelFn, fmtFn, focusFn){
+    const svg = document.getElementById(svgId);
+    const W = 280, H = 140, padB = 20, padT = 14, padX = 6;
+    const n = items.length;
+    if(!n){ svg.innerHTML = ''; svg.parentElement.insertAdjacentHTML('beforeend', '<div class="empty-chart">Sin datos todavía</div>'); return; }
+    if(n === 1){
+      const v = valueFn(items[0]);
+      svg.innerHTML = `<text x="140" y="75" text-anchor="middle" font-size="26" font-weight="800" fill="var(--ink)">${fmtFn(v)}</text>
+        <text x="140" y="100" text-anchor="middle" class="axis-label">${labelFn(items[0])} · primer mes registrado</text>`;
+      return;
+    }
+    const max = Math.max(...items.map(valueFn)) * 1.2 || 1;
+    const min = Math.min(0, Math.min(...items.map(valueFn)));
+    const stepX = (W - padX*2) / (n-1);
+    const yFor = v => H - padB - ((v-min)/(max-min||1)) * (H-padB-padT);
+    let pts = items.map((d,i)=>[padX + i*stepX, yFor(valueFn(d))]);
+    let path = 'M ' + pts.map(p=>p.join(',')).join(' L ');
+    let area = `M ${pts[0][0]},${H-padB} L ` + pts.map(p=>p.join(',')).join(' L ') + ` L ${pts[pts.length-1][0]},${H-padB} Z`;
+    let html = `<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35"></stop>
+      <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"></stop>
+    </linearGradient></defs>`;
+    html += `<path class="area-fill" d="${area}"></path><path class="area-line" d="${path}"></path>`;
+    items.forEach((d,i)=>{
+      html += `<circle class="area-dot ${focusFn(d)?'focus':''}" cx="${pts[i][0].toFixed(1)}" cy="${pts[i][1].toFixed(1)}" r="3.5" data-i="${i}"></circle>`;
+      html += `<text class="axis-label" x="${pts[i][0].toFixed(1)}" y="${H-4}" text-anchor="middle">${labelFn(d)}</text>`;
+    });
+    svg.innerHTML = html;
+    svg.querySelectorAll('.area-dot').forEach(dot=>{
+      const d = items[+dot.getAttribute('data-i')];
+      dot.addEventListener('mousemove', (e)=> showTip(e, `<b>${labelFn(d)}</b>: ${fmtFn(valueFn(d))}`));
+      dot.addEventListener('mouseleave', hideTip);
+    });
+  }
+
   const DATA_PATH = window.DATA_PATH || 'data/history.json';
   const PIN_MONTH = window.PIN_MONTH || null;
 
@@ -185,43 +250,84 @@
     const months = data.months || [];
     const latest = (PIN_MONTH && months.find(m=>m.month===PIN_MONTH)) || months[months.length-1];
     if(!latest){ document.getElementById('headerSub').textContent = 'Todavía no hay datos.'; return; }
+    const idx = months.indexOf(latest);
+    const prev = idx > 0 ? months[idx-1] : null;
 
     document.getElementById('headerSub').innerHTML =
       `<span>${latest.label}</span><span>·</span><span>${latest.campaign_range}</span><span>·</span><span>Generado el ${latest.generated_at}</span>`;
-    document.getElementById('detailTitle').textContent = `Detalle por envío — ${latest.label}`;
+    document.getElementById('detailTitle').textContent = `Por email — ${latest.label}`;
 
-    document.getElementById('statsRow').innerHTML = `
-      <div class="stat"><div class="n">${fmt(latest.avg_open_rate,1)}%</div><div class="l">Apertura media</div></div>
-      <div class="stat"><div class="n">${fmt(latest.avg_click_rate,2)}%</div><div class="l">Clic medio (CTR)</div></div>
-      <div class="stat"><div class="n">${fmt(latest.avg_unsub_rate,2)}%</div><div class="l">Bajas media</div></div>
-      <div class="stat"><div class="n">${fmt(latest.avg_bounce_rate,2)}%</div><div class="l">Rebote medio</div></div>
-      <div class="stat"><div class="n">${latest.conversions}</div><div class="l">Conversiones (${latest.campaigns_count} envíos)</div></div>
-      <div class="stat"><div class="n">${fmt(latest.revenue,2)} €</div><div class="l">Ingresos atribuidos</div></div>
+    document.getElementById('heroRow').innerHTML = `
+      <div class="hero-card">
+        ${drawGauge(latest.avg_open_rate)}
+        ${deltaBadge(latest.avg_open_rate, prev && prev.avg_open_rate, true)}
+      </div>
+      <div class="hero-card">
+        <div class="hero-icon">🖱️</div>
+        <div class="hero-num">${fmt(latest.avg_click_rate,2)}%</div>
+        <div class="hero-label">Clic medio</div>
+        ${deltaBadge(latest.avg_click_rate, prev && prev.avg_click_rate, true)}
+      </div>
+      <div class="hero-card">
+        <div class="hero-icon">🛒</div>
+        <div class="hero-num">${latest.conversions}</div>
+        <div class="hero-label">Conversiones (${latest.campaigns_count} envíos)</div>
+        ${deltaBadge(latest.conversions, prev && prev.conversions, true)}
+      </div>
+      <div class="hero-card">
+        <div class="hero-icon">💶</div>
+        <div class="hero-num">${fmt(latest.revenue,0)}€</div>
+        <div class="hero-label">Ingresos atribuidos</div>
+        ${deltaBadge(latest.revenue, prev && prev.revenue, true)}
+      </div>
     `;
-    document.getElementById('statsNote').textContent = 'Datos de la API de Klaviyo · reporte por campaña, atribución a "Placed Order"';
 
-    drawBarChart('trendOpen', months, m=>m.avg_open_rate, m=>m.month.slice(2), v=>v.toFixed(1)+'%', m=>m===latest);
-    drawBarChart('trendClick', months, m=>m.avg_click_rate, m=>m.month.slice(2), v=>v.toFixed(2)+'%', m=>m===latest);
-    drawBarChart('trendRevenue', months, m=>m.revenue, m=>m.month.slice(2), v=>v.toFixed(0)+'€', m=>m===latest);
+    const rows = (latest.campaigns || []).slice().sort((a,b)=>b.revenue-a.revenue);
+    let highlightsHtml = '';
+    if(rows.length){
+      const best = rows.slice().sort((a,b)=> (b.revenue+b.click_rate*50) - (a.revenue+a.click_rate*50))[0];
+      const worstUnsub = rows.slice().sort((a,b)=>b.unsub_rate-a.unsub_rate)[0];
+      highlightsHtml += `
+        <div class="highlight-card win">
+          <div class="highlight-eyebrow">🏆 Mejor email del mes</div>
+          <div class="highlight-headline">Mail ${best.mail} — "${best.subject}"</div>
+          <div class="highlight-body">${fmt(best.open_rate,1)}% de apertura, ${fmt(best.click_rate,2)}% de clic y ${best.conversions} ${best.conversions===1?'venta':'ventas'} (${fmt(best.revenue,2)} €). El que mejor combina alcance y resultado este mes.</div>
+        </div>
+        <div class="highlight-card watch">
+          <div class="highlight-eyebrow">👀 A vigilar</div>
+          <div class="highlight-headline">Mail ${worstUnsub.mail} — "${worstUnsub.subject}"</div>
+          <div class="highlight-body">Fue el que más bajas generó del mes (${fmt(worstUnsub.unsub_rate,2)}%). No es alarmante, pero conviene tenerlo en cuenta para el tono del próximo envío similar.</div>
+        </div>
+      `;
+    }
+    document.getElementById('highlightsRow').innerHTML = highlightsHtml;
 
-    const rows = latest.campaigns || [];
-    const maxCtr = Math.max(...rows.map(d=>d.click_rate));
-    const minCtr = Math.min(...rows.map(d=>d.click_rate));
-    const maxUnsub = Math.max(...rows.map(d=>d.unsub_rate));
-    document.getElementById('detailRows').innerHTML = rows.map(d=>`
-      <tr>
-        <td>Mail ${d.mail}</td>
-        <td class="subj">${d.subject}</td>
-        <td>${d.send}</td>
-        <td>${d.delivered.toLocaleString('es-ES')}</td>
-        <td>${fmt(d.open_rate,1)}%</td>
-        <td class="${d.click_rate===maxCtr?'best':d.click_rate===minCtr?'worst':''}">${fmt(d.click_rate,2)}%</td>
-        <td>${fmt(d.ctor,2)}%</td>
-        <td>${d.conversions}</td>
-        <td>${fmt(d.revenue,2)} €</td>
-        <td class="${d.unsub_rate===maxUnsub?'worst':''}">${fmt(d.unsub_rate,2)}%</td>
-        <td>${fmt(d.bounce_rate,2)}%</td>
-      </tr>
+    drawAreaChart('trendOpen', months, m=>m.avg_open_rate, m=>m.month.slice(2), v=>v.toFixed(1)+'%', m=>m===latest);
+    drawAreaChart('trendClick', months, m=>m.avg_click_rate, m=>m.month.slice(2), v=>v.toFixed(2)+'%', m=>m===latest);
+    drawAreaChart('trendRevenue', months, m=>m.revenue, m=>m.month.slice(2), v=>v.toFixed(0)+'€', m=>m===latest);
+
+    const maxOpen = Math.max(...rows.map(d=>d.open_rate), 1);
+    const maxClick = Math.max(...rows.map(d=>d.click_rate), 0.1);
+    document.getElementById('mailCards').innerHTML = rows.slice().sort((a,b)=>a.mail-b.mail).map(d=>`
+      <div class="mail-card">
+        <div>
+          <div class="mail-id">Mail ${d.mail} · ${d.send.split('-').reverse().join('/')}</div>
+          <div class="mail-subject">${d.subject}</div>
+        </div>
+        <div class="metric-bar-group">
+          <div class="metric-bar-label">Apertura <b>${fmt(d.open_rate,1)}%</b></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:${(d.open_rate/maxOpen*100).toFixed(0)}%"></div></div>
+        </div>
+        <div class="metric-bar-group">
+          <div class="metric-bar-label">Clic <b>${fmt(d.click_rate,2)}%</b></div>
+          <div class="metric-bar-track"><div class="metric-bar-fill" style="width:${(d.click_rate/maxClick*100).toFixed(0)}%"></div></div>
+        </div>
+        <div class="mail-right">
+          <div class="mail-stat"><div class="n">${d.conversions}</div><div class="l">Ventas</div></div>
+          <div class="mail-stat"><div class="n">${fmt(d.revenue,0)}€</div><div class="l">Ingresos</div></div>
+        </div>
+        <div class="mail-tech">Entregados: <b>${d.delivered.toLocaleString('es-ES')}</b> · Bajas: <b class="${d.unsub_rate>0.6?'flag-hi':''}">${fmt(d.unsub_rate,2)}%</b> · Rebote: <b class="${d.bounce_rate>1?'flag-hi':''}">${fmt(d.bounce_rate,2)}%</b></div>
+      </div>
     `).join("");
 
     const linkBase = window.REPORTS_LINK_BASE || 'reports/';
@@ -229,7 +335,7 @@
     document.getElementById('monthsList').innerHTML = older.length
       ? older.map(m=>`<a href="${linkBase}${m.month}.html">${m.label}</a>`).join("") + (PIN_MONTH ? `<a href="${window.LATEST_LINK||'../index.html'}">← Ver informe más reciente</a>` : "")
       : (PIN_MONTH ? "" : `<span style="font-size:12.5px;color:var(--muted);">Este es el primer informe — los meses anteriores aparecerán aquí a partir de la próxima actualización.</span>`);
-  }).catch(()=>{
+  }).catch((e)=>{
     document.getElementById('headerSub').textContent = 'No se pudieron cargar los datos.';
   });
 </script>
