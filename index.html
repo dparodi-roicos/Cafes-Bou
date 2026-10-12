@@ -116,6 +116,21 @@
   .mail-tech b{color:var(--body);}
   .flag-hi{color:var(--critical);font-weight:700;}
 
+  /* Insights: best practices / red flags */
+  .insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:700px){ .insights-grid{grid-template-columns:1fr;} }
+  .insight-card{border-radius:16px;padding:20px 22px;box-shadow:var(--shadow-lg);border:1px solid var(--border);background:var(--surface);}
+  .insight-card.good{border-color:var(--ok);background:linear-gradient(135deg, var(--ok-soft), var(--surface));}
+  .insight-card.bad{border-color:var(--critical);background:linear-gradient(135deg, var(--critical-soft), var(--surface));}
+  .insight-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:12px;}
+  .insight-card.good .insight-eyebrow{color:var(--ok);}
+  .insight-card.bad .insight-eyebrow{color:var(--critical);}
+  .insight-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .insight-list li{font-size:13px;line-height:1.5;color:var(--body);padding-left:20px;position:relative;}
+  .insight-list li::before{position:absolute;left:0;top:1px;font-size:12px;font-weight:800;}
+  .insight-card.good .insight-list li::before{content:"✓";color:var(--ok);}
+  .insight-card.bad .insight-list li::before{content:"✕";color:var(--critical);}
+
   .months-list{display:flex;flex-wrap:wrap;gap:8px;}
   .months-list a{font-size:12.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:8px 15px;text-decoration:none;box-shadow:var(--shadow);}
   .months-list a:hover{border-color:var(--accent);color:var(--accent);}
@@ -167,6 +182,22 @@
     <div class="block-title" id="detailTitle" style="margin:-10px 0 4px;">Por email</div>
     <div class="block-desc">Las barras muestran apertura y clic de un vistazo. El detalle técnico (bajas y rebotes) va debajo de cada tarjeta.</div>
     <div class="mail-cards" id="mailCards"></div>
+  </section>
+
+  <section class="block" id="insightsBlock" style="display:none;">
+    <div class="block-head"><span class="block-eyebrow">Análisis</span></div>
+    <div class="block-title" style="margin:-10px 0 4px;">Buenas prácticas y red flags del mes</div>
+    <div class="block-desc">Lecturas basadas en los envíos reales de este mes — qué repetir y qué vigilar en los próximos.</div>
+    <div class="insights-grid">
+      <div class="insight-card good">
+        <div class="insight-eyebrow">✓ Buenas prácticas</div>
+        <ul class="insight-list" id="bestPracticesList"></ul>
+      </div>
+      <div class="insight-card bad">
+        <div class="insight-eyebrow">✕ Red flags</div>
+        <ul class="insight-list" id="redFlagsList"></ul>
+      </div>
+    </div>
   </section>
 
   <section class="block">
@@ -299,6 +330,14 @@
       `;
     }
     document.getElementById('highlightsRow').innerHTML = highlightsHtml;
+
+    if(latest.insights && ((latest.insights.best_practices||[]).length || (latest.insights.red_flags||[]).length)){
+      document.getElementById('insightsBlock').style.display = '';
+      document.getElementById('bestPracticesList').innerHTML =
+        (latest.insights.best_practices||[]).map(t=>`<li>${t}</li>`).join('');
+      document.getElementById('redFlagsList').innerHTML =
+        (latest.insights.red_flags||[]).map(t=>`<li>${t}</li>`).join('');
+    }
 
     drawAreaChart('trendOpen', months, m=>m.avg_open_rate, m=>m.month.slice(2), v=>v.toFixed(1)+'%', m=>m===latest);
     drawAreaChart('trendClick', months, m=>m.avg_click_rate, m=>m.month.slice(2), v=>v.toFixed(2)+'%', m=>m===latest);
